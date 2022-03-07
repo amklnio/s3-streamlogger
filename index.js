@@ -1,7 +1,7 @@
 var stream   = require('stream');
 var util     = require('util');
 var strftime = require('strftime');
-var aws      = require('aws-sdk');
+var aws      = require('aws-sdk/clients/S3');
 var branch   = require('git-branch');
 var os       = require('os');
 var zlib     = require('zlib');
@@ -60,7 +60,7 @@ function S3StreamLogger(options){
         this.name_format = `%Y-%m-%d-%H-%M-%S-%L-${_current_branch}-${os.hostname()}${_extension}`;
     }
 
-    this.s3           = new aws.S3(options.config);
+    this.s3           = new S3(options.config);
     this.timeout      = null;
     this.object_name  = null;
     this.file_started = null;
